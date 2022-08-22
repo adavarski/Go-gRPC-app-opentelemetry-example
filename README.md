@@ -1,8 +1,10 @@
-## Example Observable (logs, metrics, and trace) gRPC Application using Opentelemetry 
+## Example Observable (logs, metrics, and trace) gRPC Application using OpenTelemetry 
 
 Demo for patterns to instrument command-line applications, HTTP clients and servers, and gRPC applications. Implemented
 structured and levelled logging using [zerolog](https://github.com/rs/zerolog), export measurements from your applications in the statsd format using [datadog-go](https://github.com/DataDog/datadog-go). 
 Finally export traces using [opentelemetry-go](https://github.com/open-telemetry/opentelemetry-go) to correlate transactions across system boundaries.
+
+Note: This repository follows the book "Practical Go: Building Scalable Network and Non-Network Applications" by Amit Saha. The official repository for this book can be found at https://github.com/practicalgo/code
 
 ### Instructions for building and running using Docker.
 
