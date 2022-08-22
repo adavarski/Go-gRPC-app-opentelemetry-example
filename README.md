@@ -1,10 +1,10 @@
 ## Example Observable (logs, metrics, and trace) gRPC Application using Opentelemetry 
 
 Demo for patterns to instrument command-line applications, HTTP clients and servers, and gRPC applications. Implemented
-structured and levelled logging using github.com/rs/zerolog, export measurements from your applications in the statsd format using github.com/DataDog/datadog-go. 
-Finally export traces using github.com/open-­telemetry/opentelemetry-go to correlate transactions across system boundaries.
+structured and levelled logging using [zerolog](github.com/rs/zerolog), export measurements from your applications in the statsd format using [datadog-go](github.com/DataDog/datadog-go). 
+Finally export traces using [opentelemetry-go](github.com/open-telemetry/opentelemetry-go) to correlate transactions across system boundaries.
 
-### Instructions for building and running.
+### Instructions for building and running using Docker.
 
 ### Pre-requisites
 
@@ -80,7 +80,7 @@ $ docker push davarski/users-svc
 ```
 
 
-## statsd, prometheus and jaeger
+### statsd, prometheus and jaeger
 
 Instead of running the statsd server originally created by [etsy](https://github.com/statsd/statsd), we will run [statsd_exporter](https://github.com/prometheus/statsd_exporter). The key reason we do so, i.e. preferring the second option is that 
 it allows us to view the metrics via [prometheus web UI](https://prometheus.io). 
@@ -88,7 +88,7 @@ it allows us to view the metrics via [prometheus web UI](https://prometheus.io).
 We will also start a container running [jaeger](https://www.jaegertracing.io/) as our
 distributed tracing server.
 
-## Running them all
+### Running them all
 
 The [docker-compose.yml](./docker-compose.yml) runs containers to run the above servers, along with running a MySQL
 server, a MinIO container as well as the HTTP and gRPC servers using the images you built above
@@ -139,13 +139,13 @@ respectively.
 Now, vist the URL http://127.0.0.1:9090/targets in your browser, and you should see 
 a web page, like this:
 
-![Prometheus screenshot](./prometheus_screenshot.png "Prometheus screenshot")
+![Prometheus screenshot](./pictures/Prometheus-UI.png "Prometheus screenshot")
 
 The key, is the second endpoint, which tells us that it can read the data from the statsd server correctly. Our Go applications will send metrics to `statsd` and prometheus server will read the data from statsd. We will then, soon learn to view and query the metrics from `prometheus`.
 
 Next, visit the URL http://127.0.0.1:16686/search from your browser - this should show you the Jaeger Web UI:
 
-![Jaeger screenshot](./jaeger_screenshot.PNG "Jaeger Web UI")
+![Jaeger screenshot](./pictures/Jaeger-UI.png "Jaeger Web UI")
 
 ## Run the Package CLI
 
@@ -164,16 +164,15 @@ $ docker run -v ${PWD}:/data -e X_AUTH_TOKEN=token-123 --network go-grpc-app-ope
 {"level":"info","version":"0.1","command":"register","time":"2022-08-22T10:14:42Z","message":"Uploading package..."}
 Package uploaded: 2/test-0.7-/data/main.go
 
-
 ```
 
 
-## Viewing the distributed traces
+### Viewing the distributed traces
 
 Now, go to the Jaeger Web UI: http://127.0.0.1:16686/search in your browser, select `PkgServer-Cli` from the Service drop down box
 on the top left and click on "Find Traces". You should see trace data from your applications.
 
-![Jaeger screenshot](./jaeger_traces_screenshot.PNG "Jaeger Web UI with traces")
+![Jaeger screenshot](./pictures/Jaeger-UI-PkgServer-Cli-trace.png "Jaeger Web UI with traces")
 
 ## Viewing the metrics
 
@@ -183,13 +182,19 @@ For the HTTP server:
 
 http://127.0.0.1:9090/graph?g0.expr=pkgserver_http_request_latency
 
+![Prometheus screenshot](./pictures/Prometheus-UI-HTTP-Server.png "Prometheus Web UI HTTP server")
+
 For the gRPC server:
 
 http://127.0.0.1:9090/graph?g0.expr=userssvc_grpc_unary_latency
 
+![Prometheus screenshot](./pictures/Prometheus-UI-gRPC-Server.png "Prometheus Web UI gRPC server")
+
 For the command line app:
 
 http://127.0.0.1:9090/graph?g0.expr=cmd_duration
+
+![Prometheus screenshot](./pictures/Prometheus-UI-CLI-app.png "Prometheus Web UI gRPC server")
 
 The measurements are all reported in seconds.
 
@@ -198,5 +203,5 @@ The measurements are all reported in seconds.
 For terminating the docker containers, run the following from a terminal window:
 
 ```
-$ docker-compose rm -fsv
+$ docker-compose rm -fsv (docker-compose down)
 ```
