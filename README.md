@@ -157,7 +157,7 @@ What we will be doing is running the container in the same docker network as the
 containers above, so we specify the network name via the `--network` option.
 Hence, as a result, we are able to use the docker compose service name
 to communicate with the package server, `pkgserver` as well as
-`statsd` and `jaeger` (as you can see in [config.yaml](./command-line-app/config.yml).
+`statsd` and `jaeger` (as you can see in [config.yaml](./command-line-app/config.yml)).
 
 
 ```
