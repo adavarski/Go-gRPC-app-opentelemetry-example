@@ -206,5 +206,5 @@ The measurements are all reported in seconds.
 For terminating the docker containers, run the following from a terminal window:
 
 ```
-$ docker-compose rm -fsv (docker-compose down)
+$ docker-compose rm -fsv ($ docker-compose down; $ docker rm $(docker ps --filter "status=exited" -q); $ docker system prune -a)
 ```
