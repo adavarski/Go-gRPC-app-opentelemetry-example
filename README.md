@@ -135,6 +135,8 @@ Create a new bucket, `test-bucket` in MinIO by going to: http://127.0.0.1:9001/b
 in your browser, logging in with username and password as `admin` and `admin123`
 respectively.
 
+![Minio screenshot](./pictures/Minio-UI-create-bucket.png "Minio Web UI : create bucket")
+
 
 Now, vist the URL http://127.0.0.1:9090/targets in your browser, and you should see 
 a web page, like this:
