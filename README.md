@@ -1,7 +1,7 @@
 ## Example Observable (logs, metrics, and trace) gRPC Application using Opentelemetry 
 
 Demo for patterns to instrument command-line applications, HTTP clients and servers, and gRPC applications. Implemented
-structured and levelled logging using [zerolog](github.com/rs/zerolog), export measurements from your applications in the statsd format using [datadog-go](github.com/DataDog/datadog-go). 
+structured and levelled logging using [zerolog](https://github.com/rs/zerolog), export measurements from your applications in the statsd format using [datadog-go](github.com/DataDog/datadog-go). 
 Finally export traces using [opentelemetry-go](github.com/open-telemetry/opentelemetry-go) to correlate transactions across system boundaries.
 
 ### Instructions for building and running using Docker.
