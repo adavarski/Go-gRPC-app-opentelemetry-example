@@ -22,7 +22,7 @@ require (
 
 replace github.com/adavarski/Go-gRPC-app-opentelemetry-example/grpc-server/service => ../grpc-server/service
 
-replace github.com/practicalgo/code/appendix-a/grpc-server/service => ../grpc-server/service
+replace github.com/adavarski/Go-gRPC-app-opentelemetry-example/grpc-server/service => ../grpc-server/service
 
 // Remove replace and upgrade library once
 // https://github.com/testcontainers/testcontainers-go/pull/342 is merged
